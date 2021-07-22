@@ -1,0 +1,22 @@
+<h1> All posts <h1>
+
+<% @posts.each do |post| %>
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+      <p class="card-text"><%= post.body[0, 50] + '...' %></p>
+    </div>
+    <div class="card-footer">
+      <small>
+        <%= link_to 'Show post', post_path(post), class: "btn btn-info mb-2" %>
+        <%= link_to 'Edit post', edit_post_path(post), class: "btn btn-secondary mb-2" %>
+        <%= link_to 'Delete post', post_path(post), data: { method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger mb-2" %>
+      </small>
+    </div>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to 'Create post', new_post_path, class: "btn btn-warning" %>
+</div>
