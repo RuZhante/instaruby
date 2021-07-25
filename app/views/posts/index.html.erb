@@ -2,7 +2,12 @@
 
 <% @posts.each do |post| %>
   <div class="card">
-    <img src="..." class="card-img-top" alt="...">
+    <%
+=begin%>
+ <img src="..." class="card-img-top" alt="..."> 
+<%
+=end%>
+    <%= image_tag post.image_url, class: "card-img-top" %>
     <div class="card-body">
       <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
       <p class="card-text"><%= post.body[0, 50] + '...' %></p>
@@ -15,6 +20,7 @@
       </small>
     </div>
   </div>
+  </br>
 <% end %>
 
 <div>

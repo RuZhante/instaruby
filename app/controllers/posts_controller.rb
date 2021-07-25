@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by id: params[:id]
+    @post = Post.find(params[:id])
   end
 
   def new
@@ -15,28 +15,28 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to posts_path
+      redirect_to posts_path, flash: {success: "Post was added"}
     else
-      render :new
+      render :new, flash: {alert: "Some error occured"}
     end  
   end
 
   def edit
-    @post = Post.find_by id: params[:id]
+    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find_by id: params[:id]
+    @post = Post.find(params[:id])
 
     if @post.update(post_params)
-      redirect_to posts_path
+      redirect_to posts_path, flash: {success: "Post was updated"}
     else
-      render :edit
+      render :edit, flash: {alert: "Some error occured"}
     end
   end
 
   def destroy
-    @post = Post.find_by id: params[:id]
+    @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
   end
@@ -44,6 +44,6 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:title, :body, :image)
     end
 end
