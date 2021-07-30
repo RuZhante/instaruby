@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :posts
+  devise_for :users
   
-  root 'posts#index'
+  resources :users, only: [:show, :edit, :update] do
+    resources :posts
+  end
+  root to: 'users#home'
 end

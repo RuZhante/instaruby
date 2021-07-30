@@ -1,10 +1,14 @@
 class PostsController < ApplicationController
+  before_action :load_user
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
+
   def index
-    @posts = Post.all
+    @posts = @user.posts
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = @user.posts.find(params[:id])
   end
 
   def new
@@ -13,37 +17,41 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-
+    @post.user = @user
     if @post.save
-      redirect_to posts_path, flash: {success: "Post was added"}
+      redirect_to user_post_path(@user, @post), flash: { success: "Post was added" }
     else
-      render :new, flash: {alert: "Some error occured"}
+      render :new, flash: { alert: "Some error occured" }
     end  
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = @user.posts.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = @user.posts.find(params[:id])
 
     if @post.update(post_params)
-      redirect_to posts_path, flash: {success: "Post was updated"}
+      redirect_to user_post_path(@user, @post), flash: { success: "Post was updated" }
     else
-      render :edit, flash: {alert: "Some error occured"}
+      render :edit, flash: { alert: "Some error occured" }
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = @user.posts.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_to user_posts_path
   end
 
 
   private
     def post_params
       params.require(:post).permit(:title, :body, :image)
+    end
+
+    def load_user
+      @user = User.find(params[:user_id])
     end
 end
