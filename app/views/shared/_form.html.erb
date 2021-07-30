@@ -1,4 +1,4 @@
-<%= form_with model: @post do |f| %>
+<%= form_with(model: [@user, @post], local: true) do |f| %>
   <div>
     <%= f.hidden_field :image, value: @post.cached_image_data %>
     <%= f.file_field :image %>
