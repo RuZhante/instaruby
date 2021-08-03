@@ -4,10 +4,14 @@
 
 <ul>
   <li>
+  <% if policy(@post).update? %>
     <%= link_to 'Edit post', edit_user_post_path(@user, @post), class: "btn btn-secondary mb-2" %>
+  <% end %>
   </li>
   <li>
+  <% if policy(@post).destroy? %>
     <%= link_to 'Delete post', user_post_path(@user, @post), data: { method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger mb-2" %>
+  <% end %>
   </li>
   <li>
     <%= link_to 'Back', user_posts_path(@user, @post), class: "btn btn-secondary mb-2" %>

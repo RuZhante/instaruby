@@ -21,6 +21,8 @@ gem 'jbuilder', '~> 2.7'
 gem "shrine", "~> 3.0"
 # Flexible authentication
 gem 'devise', '~> 4.2'
+# Object oriented authorization for Rails applications
+gem 'pundit', '~> 2.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
