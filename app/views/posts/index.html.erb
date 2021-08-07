@@ -1,4 +1,4 @@
-<h1> All posts <h1>
+<h1><%= link_to @user.name, user_path(@user) %> all posts <h1>
 <% if user_signed_in? %>
   <% @posts.each do |post| %>
     <div class="card">
@@ -26,5 +26,7 @@
 <% end %>
 
 <div>
-  <%= link_to 'Create post', new_user_post_path, class: "btn btn-warning" %>
+  <% if current_user == @user %>
+    <%= link_to 'Create post', new_user_post_path, class: "btn btn-warning" %>
+  <% end %>
 </div>

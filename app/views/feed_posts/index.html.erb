@@ -1,0 +1,6 @@
+<h1> Feed </h1>
+<% @posts.each do |post|%>
+<%= image_tag post.image_url, class: "card-img-top" %>
+<h1> <%= post.title %></h1>
+<p> <%= post.body %></p>
+<% end %>

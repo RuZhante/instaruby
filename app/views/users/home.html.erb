@@ -1,5 +1,11 @@
 <% if current_user.present? %>
   <h1> Welcome to Instaruby </h1>
+  <% @users.each do |user| %>
+    <% user.posts.each do |post| %>
+      <%= image_tag post.image_url, class: "card-img-top" %>
+      <p><%= link_to post.title,  user_post_path(user, post) %></p>
+    <% end %>
+  <% end %>
 <% else%>
   <h1> Welcome to Instaruby. Please Register or Log In </h1>
 <% end %>
